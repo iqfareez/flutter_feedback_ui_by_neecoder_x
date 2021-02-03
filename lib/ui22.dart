@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
-class UI22 extends StatelessWidget {
+class UI22 extends StatefulWidget {
+  @override
+  _UI22State createState() => _UI22State();
+}
+
+class _UI22State extends State<UI22> {
+  List<bool> isTypeSelected = [false, false, false, true, true];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,11 +40,51 @@ class UI22 extends StatelessWidget {
               ),
             ),
             SizedBox(height: 25.0),
-            buildCheckItem("Login trouble"),
-            buildCheckItem("Phone number related"),
-            buildCheckItem("Personal profile"),
-            buildCheckItem("Other issues"),
-            buildCheckItem("Suggestions"),
+            GestureDetector(
+              child: buildCheckItem(
+                  title: "Login trouble", isSelected: isTypeSelected[0]),
+              onTap: () {
+                setState(() {
+                  isTypeSelected[0] = !isTypeSelected[0];
+                });
+              },
+            ),
+            GestureDetector(
+              child: buildCheckItem(
+                  title: "Phone number related", isSelected: isTypeSelected[1]),
+              onTap: () {
+                setState(() {
+                  isTypeSelected[1] = !isTypeSelected[1];
+                });
+              },
+            ),
+            GestureDetector(
+              child: buildCheckItem(
+                  title: "Personal profile", isSelected: isTypeSelected[2]),
+              onTap: () {
+                setState(() {
+                  isTypeSelected[2] = !isTypeSelected[2];
+                });
+              },
+            ),
+            GestureDetector(
+              child: buildCheckItem(
+                  title: "Other issues", isSelected: isTypeSelected[3]),
+              onTap: () {
+                setState(() {
+                  isTypeSelected[3] = !isTypeSelected[3];
+                });
+              },
+            ),
+            GestureDetector(
+              child: buildCheckItem(
+                  title: "Suggestions", isSelected: isTypeSelected[4]),
+              onTap: () {
+                setState(() {
+                  isTypeSelected[4] = !isTypeSelected[4];
+                });
+              },
+            ),
             SizedBox(
               height: 20.0,
             ),
@@ -185,19 +232,21 @@ class UI22 extends StatelessWidget {
     );
   }
 
-  buildCheckItem(title) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 15.0),
+  Widget buildCheckItem({String title, bool isSelected}) {
+    return Container(
+      padding: const EdgeInsets.all(6.0),
       child: Row(
         children: [
           Icon(
-            Icons.check_circle,
-            color: Colors.blue,
+            isSelected ? Icons.check_circle : Icons.circle,
+            color: isSelected ? Colors.blue : Colors.grey,
           ),
           SizedBox(width: 10.0),
           Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: isSelected ? Colors.blue : Colors.grey),
           ),
         ],
       ),
